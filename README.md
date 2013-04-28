@@ -7,6 +7,6 @@ And yes, this is not a line-by-line translation. The original script uses proced
 
 To run this dispatch.py use following commands:
 
-1. python manage.py syncdb
+1. python manage.py syncdb_with_tags
 
 2. python manage.py send_mails [packagename]
