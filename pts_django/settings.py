@@ -115,7 +115,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'pts_django',
+    'mailer',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -150,6 +150,3 @@ LOGGING = {
         },
     }
 }
-
-LOCAL_PART='abc'
-LOCAL_PART_SUFFIX='_def'

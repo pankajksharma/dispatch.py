@@ -52,6 +52,3 @@ class Subscriptions(models.Model):
 	package = models.ManyToManyField(Packages)
 	tag = models.ManyToManyField(Tags)
 	created_on = models.DateTimeField(default=timezone.now())
-
-	def __unicode__(self):
-		return self.package

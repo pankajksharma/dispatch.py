@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.core.management import call_command
 from django.db.utils import IntegrityError
-from pts_django.models import Tags
+from mailer.models import Tags
 
 class Command(BaseCommand):
 	help = 'Sends mail to relevent subscribers'

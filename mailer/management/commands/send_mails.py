@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 
-from pts_django.dispatch import send_mails
+from mailer.dispatch import send_mails
 
 class Command(BaseCommand):
     help = 'Sends mail to relevent subscribers'
