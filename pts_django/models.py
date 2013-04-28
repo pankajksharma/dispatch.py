@@ -12,7 +12,7 @@ class Subscribers(models.Model):
 	def get_subscribers_email(package_name, tag):
 		"""Returns list of emails of Interested Subscribers for given package name and tag."""
 		subscribers = Subscribers.objects.values_list('email_id', flat=True)
-		subscribers = subscribers.filter(subscriptions__package__name__exact=package_name, subscriptions__tag_name__exact=tag).all()	
+		subscribers = subscribers.filter(subscriptions__package__name__exact=package_name, subscriptions__tag__name__exact=tag).all()	
 		return subscribers
 
 class Packages(models.Model):
