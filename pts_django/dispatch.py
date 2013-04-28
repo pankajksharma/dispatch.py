@@ -38,13 +38,14 @@ def send_mails_to_all(message_client, receiver_emails=[]):
 	message = message_client.get_message()
 	subject = message_client.get_header_component("subject") or "<Some subject>"
 	sender = message_client.get_header_component("From") or "<Default Sender>"
-	# print subject,'send_mail', send
 	send_mail(subject, message, sender, receiver_emails, fail_silently=False)
 
 def send_mails():
 	content = sys.stdin.read()
-	log.info(content)
 	package_name = get_package_name()
+	if not package_name:
+		log.error('No package name suggested.')
+		exit(1)
 	keyword = get_keyword(package_name)
 	message_cl = Message(content, package_name, keyword)
 	message = message_cl.get_message()
