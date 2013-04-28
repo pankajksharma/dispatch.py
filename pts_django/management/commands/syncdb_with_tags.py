@@ -12,6 +12,6 @@ class Command(BaseCommand):
 			for tag in Tags.VALID_TAGS:
 				tag_ob = Tags(name=tag[0], description=tag[1])
 				tag_ob.save()
-				print 'Createing %s' %tag_ob
+				print 'Createing tag: %s' %tag_ob
 		except IntegrityError:
 			print "Some tags already exists."

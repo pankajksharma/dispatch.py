@@ -44,7 +44,7 @@ class Tags(models.Model):
 	description = models.CharField(max_length=250)
 
 	def __unicode__(self):
-		return self.name + self.description
+		return '%s (%s)' %(self.name, self.description)
 
 class Subscriptions(models.Model):
 	"""Base class for Subscriptions. Has many to many relation with Subscribers and Packages"""
