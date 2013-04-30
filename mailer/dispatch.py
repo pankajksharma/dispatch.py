@@ -13,10 +13,10 @@ def get_package_name():
 	"""Loads package name from command line arguments."""
 	package = None
 	try:
-		if len(sys.argv) > 1:
+		package = os.environ.get('LOCAL_PART', '') + os.environ.get('LOCAL_PART_SUFFIX', '') 
+		if not package and len(sys.argv) > 1:
 			package = sys.argv[-1].lower()
 	except Exception,e:
-		print str(e)
 		log.error(str(e))
 	finally:
 		return package
@@ -33,12 +33,15 @@ def get_keyword(package):
 
 def send_mails_to_all(message_client, receiver_emails=[]):
 	receiver_emails.append('archive-outgoing@packages.qa.debian.org')
-	log.info('Sending mails to ')
+	log.info('Sending mails to '+str(receiver_emails))
 	message_client.add_headers()
 	message = message_client.get_message()
 	subject = message_client.get_header_component("subject") or "<Some subject>"
 	sender = message_client.get_header_component("From") or "<Default Sender>"
-	send_mail(subject, message, sender, receiver_emails, fail_silently=False)
+	try:
+		send_mail(subject, message, sender, receiver_emails, fail_silently=False)
+	except Exception,e:
+		log.error(str(e))
 
 def send_mails():
 	content = sys.stdin.read()
@@ -53,5 +56,5 @@ def send_mails():
 	message_cl.set_keyword(tag)
 	log.info('(Tag, Keyword): (%s %s)' %(tag, keyword))
 	subscribers = Subscribers.get_subscribers_email(package_name, tag) 
-	# print package_name, keyword, message, tag, subscribers
+	print package_name, keyword, message, tag, subscribers
 	send_mails_to_all(message_cl, list(subscribers))

@@ -3,7 +3,7 @@ import logging
 class Logging(object):
 	def __init__(self, file_name=None):
 		if file_name:
-			logging.basicConfig(filename=file_name)
+			logging.basicConfig(filename=file_name,level=logging.DEBUG)
 		logging.basicConfig(level=logging.DEBUG)
 		logging.basicConfig(format='%(levelname)s:%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
