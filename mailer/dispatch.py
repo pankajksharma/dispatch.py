@@ -26,7 +26,7 @@ def get_keyword(package):
 	try:
 		substr = re.search(r'(\S+)_(\S+)', package)
 		if substr:
-			return substr.group(2)
+			return substr.groups()
 	except Exception,e:
 		log.error(str(e))
 		return None
@@ -49,12 +49,12 @@ def send_mails():
 	if not package_name:
 		log.error('No package name suggested.')
 		exit(1)
-	keyword = get_keyword(package_name)
-	message_cl = Message(content, package_name, keyword)
+	(package,keyword) = get_keyword(package_name)
+	message_cl = Message(content, package, keyword)
 	message = message_cl.get_message()
 	tag = message_cl.get_tag()
 	message_cl.set_keyword(tag)
 	log.info('(Tag, Keyword): (%s %s)' %(tag, keyword))
 	subscribers = Subscribers.get_subscribers_email(package_name, tag) 
-	print package_name, keyword, message, tag, subscribers
+	# print package, keyword, message, tag, subscribers
 	send_mails_to_all(message_cl, list(subscribers))
